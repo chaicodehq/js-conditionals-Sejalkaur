@@ -27,9 +27,28 @@
  *
  * @param {string} size - "small", "medium", or "large"
  * @param {string} type - "regular", "latte", "cappuccino", or "mocha"
- * @param {{ whippedCream?: boolean, extraShot?: boolean }} extras - Optional extras
+ * @param {
+ * { whippedCream?: boolean, extraShot?: boolean }
+ * } extras - Optional extras
  * @returns {number} Total price or -1 for invalid input
  */
 export function calculateCoffeePrice(size, type, extras = {}) {
   // Your code here
+  var baseprice = 0.0;
+  if (size === "small") baseprice = 3.0;
+  else if (size === "medium") baseprice = 4.0;
+  else if (size === "large") baseprice = 5.0;
+  else return -1;
+
+  if (type === "latte") baseprice += 1.0;
+  else if (type === "cappuccino") baseprice += 1.5;
+  else if (type === "mocha") baseprice += 2.0;
+  else if (type === "regular") baseprice = baseprice;
+  else return -1;
+
+  if (extras.whippedCream === true) baseprice += 0.5;
+  if (extras.extraShot === true) baseprice += 0.75;
+
+  var roundedoff = baseprice.toFixed(2);
+  return parseFloat(roundedoff);
 }
